@@ -1,0 +1,253 @@
+<html>
+	<head>
+		<title>LP III - Consultório</title>
+		
+		<!-- CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+		
+		<!-- JS -->
+		<script src="JS/jquery-3.6.0.min.js"></script>
+		
+		<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+       
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+		
+		<!-- Bootstrap datepicker -->
+		<link href='CSS/bootstrap-datepicker.min.css' rel='stylesheet' type='text/css'>
+		<script src='JS/bootstrap-datepicker.min.js' type='text/javascript'></script>
+		<script src='JS/bootstrap-datepicker.pt-BR.min.js' type='text/javascript'></script>
+		<script src='JS/jquery.maskMoney.js' type='text/javascript'></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+		<script src='JS/index.js' type='text/javascript'></script>
+		<script src='JS/paciente.js' type='text/javascript'></script>
+		<script src='JS/consulta.js' type='text/javascript'></script>
+	</head>
+	<body class="bg-dark">
+		<div class="container">
+			<!-- Conteudo da Página -->
+			<div class="bg-light p-3">
+				<!-- Barra Superior -->
+				<nav class="container bg-dark">
+					<div class="container text-white text-center m-2">
+						<div class="row lp-3">
+							<div class="col-md-12 d-flex justify-content-between mt-2 mb-2">
+								<span class="material-icons m-1 me-2">calendar_today</span>
+								<label class="fs-5 fw-bold"> SISTEMA DE AGENDAMENTO</label>
+								<a href="#" onclick="sair();"><span class="material-icons text-white m-1 me-2" aria-label="Sair">logout</span></a>
+							</div>
+						</div>
+					</div>
+				</nav>
+				
+				<!-- Conteudo -->
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#Consulta" type="button" role="tab" aria-controls="Consulta" onclick="listarConsulta()" aria-selected="true">Consultas</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#Paciente" type="button" role="tab" aria-controls="Paciente" onclick="listarPaciente()" aria-selected="false">Pacientes</button>
+					</li>
+				</ul>
+				<div class="tab-content" id="myTabContent">
+				
+					<!-- Consultas -->
+					<div class="tab-pane fade show active" id="Consulta" role="tabpanel">
+						<div class="container lp-3 border">
+							<div class="row">
+								<div class="col-md-12 mt-3 d-flex justify-content-center">
+									<button class="btn btn-success d-flex justify-content-center" onclick="openModalConsulta(0)"><span class="material-icons m-1  me-2"> insert_invitation</span><label class="fs-5 fw-bold">AGENDAR CONSULTA</label></button>
+								</div>
+							</div>
+						
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<table class="table border table-striped mt-3">
+										<thead class="table-dark">
+											<tr>
+												<th style="width: 15%;">Data</th>
+												<th style="width: 15%;">Hora</th>
+												<th style="width: 62%;">Cliente</th>
+												<th style="width: 8%;"></th>
+											</tr>
+										</thead>
+										<tbody id="tabConsulta">
+											
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- == Cliente ======================================================================================== -->
+					<div class="tab-pane fade" id="Paciente" role="tabpanel" aria-labelledby="cliente-tab">
+						<div class="container lp-3 border">
+							<div class="row">
+								<div class="col-md-12 mt-3 d-flex justify-content-center">
+									<button class="btn btn-success d-flex justify-content-center" onclick="openModalPaciente(0)"><span class="material-icons m-1  me-2">person_add</span><label class="fs-5 fw-bold">NOVO PACIENTE</label></button>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<table class="table border table-striped mt-3">
+										<thead class="table-dark">
+											<tr>
+												<th style="width: 12%;">Código</th>
+												<th style="width: 60%;">Cliente</th>
+												<th style="width: 20%;">Telefone</th>
+												<th style="width: 8%;"></th>
+											</tr>
+										</thead>
+										<tbody id="tabPaciente">
+											
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				<div class="card-footer text-muted border">Criado por Lucas Matheus Amaral Silva</div>
+			</div>
+		</div>
+		
+		<!-- == Login ======================================================================================== -->
+		<div class="modal fade bg-secondary" id="loginScreen" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="0" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-sm modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="input-group input-group-sm mb-3">
+									<span class="input-group-text" id="lbUsuario">Login</span>
+									<input type="text" class="form-control" aria-label="Insira o nome de usuário" aria-describedby="lbUsuario" id="txUsuario">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="input-group input-group-sm mb-3">
+									<span class="input-group-text" id="lbPassword">Senha</span>
+									<input type="password" class="form-control" aria-label="Insira a senha" aria-describedby="lbPassword" id="txSenha">
+								</div>
+							</div>
+						</div>
+						<div class="row d-flex justify-content-end">
+							<div class="col-md-6">
+								<button style="display: none;" id="fecharLogin" class="btn btn-danger" data-bs-dismiss="modal">X</button>
+								<button type="button" class="btn btn-primary w-100" onclick="logar()">ENTRAR</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- == Cadastrao ediçao cliente ======================================================================================== -->
+		<div class="modal fade" id="cadConsulta" tabindex="1" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="col-md-12 d-flex justify-content-start mt-2 mb-2">
+							<span class="material-icons m-1 me-2">event</span>
+							<label class="fs-5 fw-bold">Cadastro / Manutençao de Consultas</label>
+						</div>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="input-group date w-100 mb-2 d-flex justify-content-center">
+									<div id="cxData">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="input-group mb-3">
+									<select class="form-select" id="cxHora">
+										
+									</select>
+									<span class="input-group-text" id="cbHora">Horas</span>
+									<span class="input-group-text">:</span>
+									<select class="form-select" id="cxMinuto">
+										
+									</select>
+									<span class="input-group-text">Minutos</span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="input-group mb-3">
+									<span class="input-group-text">Valor</span>
+									<span class="input-group-text">R$</span>
+									<input type="text" class="form-control" id="cxValor" placeholder="300" aria-label="Valor">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="cbCliente">Cliente</span>
+									<select class="form-select" id="cxCliente" aria-label="Selecione o cliente">
+										<option value="1" selected>Lucas Matheus</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" id="cbFechar" data-bs-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-success" onclick="salvarConsulta()">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- == Cadastrao ediçao cliente ======================================================================================== -->
+		<div class="modal fade" id="cadPaciente" tabindex="2" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="col-md-12 d-flex justify-content-start mt-2 mb-2">
+							<span class="material-icons m-1 me-2">people</span>
+							<label class="fs-5 fw-bold">Cadastro / Manutençao de Pacientes</label>
+						</div>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="pbNome">Nome</span>
+									<input type="text" class="form-control" id="pxNome" placeholder="Nome Completo" aria-label="Nome" aria-describedby="pbNome">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="input-group mb-3">
+									<span class="input-group-text" id="pbTelefone">Telefone</span>
+									<input type="text" class="form-control" id="pxTelefone" placeholder="(xx) x xxxx xxxx" aria-label="Telefone" aria-describedby="pbTelefone">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" id="pbFechar" data-bs-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-success" onclick="salvarPaciente()">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- JS -->
+		<script> onLoad(); listarConsulta();</script>
+	</body>
+</html>
